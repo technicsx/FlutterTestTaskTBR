@@ -9,19 +9,23 @@ class CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        onTap: () => {},
-        title: RichText(
-            text: TextSpan(text: "${country.flag}   ", children: [
-          TextSpan(
-              text: "${country.phoneCode}  ",
-              style: const TextStyle(color: Colors.purple, fontSize: 16)),
-          TextSpan(
-              text: country.name,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16)),
-        ])));
+    return GestureDetector(
+      child: Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: RichText(
+                text: TextSpan(text: "${country.flag}   ", children: [
+              TextSpan(
+                  text: "${country.phoneCode}  ",
+                  style: const TextStyle(color: Colors.purple, fontSize: 16)),
+              TextSpan(
+                  text: country.name,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16)),
+            ])),
+          )),
+    );
   }
 }
