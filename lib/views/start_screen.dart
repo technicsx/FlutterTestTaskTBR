@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class StartScreen extends StatefulWidget {
   final String screenHeading = "Get Started";
@@ -13,65 +14,81 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0xFF90ACFC),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.purple,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          backgroundColor: Colors.white,
           child: const Icon(
             Icons.arrow_forward,
+            size: 32,
+            color: Colors.black,
           ),
           onPressed: () => {}),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  widget.screenHeading,
-                  style: const TextStyle(
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Flexible(
-                      child: TextField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "country",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                                borderSide: const BorderSide(
-                                    style: BorderStyle.none, width: 0))),
-                      ),
+      body: Container(
+        color: const Color(0xFF90ACFC),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Text(
+                      widget.screenHeading,
+                      style: const TextStyle(
+                          fontSize: 38.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
-                    Flexible(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: "country",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              borderSide: const BorderSide(
-                                  style: BorderStyle.none, width: 0))),
-                    )),
-                  ],
+                  ),
                 ),
-              ),
-              const Spacer(
-                flex: 1,
-              )
-            ],
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                          child: GestureDetector(
+                        onTap: () => {},
+                        child: Container(
+                          height: 60,
+                          child: Center(child: Text("+1")),
+                          decoration: BoxDecoration(
+                            color: Color(0xffb8ccfc),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                      )),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Flexible(
+                          flex: 4,
+                          child: SizedBox(
+                            height: 60,
+                              child: TextField(
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Color(0xffb8ccfc),
+                                hintText: "country",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderSide: const BorderSide(
+                                        style: BorderStyle.none, width: 0))),
+                          ))),
+                    ],
+                  ),
+                ),
+                const Spacer(
+                  flex: 1,
+                )
+              ],
+            ),
           ),
         ),
       ),
