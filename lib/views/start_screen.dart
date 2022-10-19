@@ -17,8 +17,7 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return CupertinoScaffold(
       body: Builder(
-        builder: (context) => CupertinoPageScaffold(
-          child: Scaffold(
+        builder: (context) =>  Scaffold(
             backgroundColor: const Color(0xFF90ACFC),
             floatingActionButton: FloatingActionButton(
                 shape: RoundedRectangleBorder(
@@ -61,16 +60,124 @@ class _StartScreenState extends State<StartScreen> {
                                 child: GestureDetector(
                               onTap: () => CupertinoScaffold
                                   .showCupertinoModalBottomSheet(
-                                      expand: true,
+
                                       context: context,
-                                      backgroundColor: Colors.white,
-                                      builder: (context) => Stack()),
+                                      builder: (context) => Scaffold(
+                                          backgroundColor: Color(0xFF90ACFC),
+                                          body: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 20.0),
+                                                        child: Text(
+                                                          "Country code",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize:
+                                                                      38.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () => Navigator.pop(context),
+                                                        child: Container(
+                                                      child: Center(
+                                                          child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          size: 15,
+                                                        ),
+                                                      )),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xffb8ccfc),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    )),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 20.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: SizedBox(
+                                                            height: 50,
+                                                            child: TextField(
+                                                              decoration: InputDecoration(
+                                                                contentPadding: EdgeInsets.zero,
+                                                                prefixIcon: Icon(Icons.search_rounded),
+                                                                  filled: true,
+                                                                  fillColor: Color(
+                                                                      0xffb8ccfc),
+                                                                  hintText:
+                                                                  "country",
+                                                                  border: OutlineInputBorder(
+                                                                      borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                          16.0),
+                                                                      borderSide: const BorderSide(
+                                                                          style: BorderStyle
+                                                                              .none,
+                                                                          width:
+                                                                          0))),
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ListView.builder(
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          BouncingScrollPhysics(),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      itemCount: 22,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return Container(
+                                                          height: 50,
+                                                          child: Center(
+                                                              child: Text(
+                                                                  'Entry')),
+                                                        );
+                                                      }),
+                                                ),
+                                              ],
+                                            ),
+                                          ))),
                               child: Container(
-                                height: 60,
+                                height: 50,
                                 child: Center(child: Text("+1")),
                                 decoration: BoxDecoration(
                                   color: Color(0xffb8ccfc),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(16.0),
                                 ),
                               ),
                             )),
@@ -80,15 +187,20 @@ class _StartScreenState extends State<StartScreen> {
                             Flexible(
                                 flex: 4,
                                 child: SizedBox(
-                                    height: 60,
+                                    height: 50,
                                     child: TextField(
                                       decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.only(left: 20),
                                           filled: true,
                                           fillColor: Color(0xffb8ccfc),
-                                          hintText: "country",
+                                          hintText: "Your phone number",
+                                          hintStyle: TextStyle(
+                                            color: Color(0xFF8693c7),
+                                            fontWeight: FontWeight.w500
+                                          ),
                                           border: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(20.0),
+                                                  BorderRadius.circular(16.0),
                                               borderSide: const BorderSide(
                                                   style: BorderStyle.none,
                                                   width: 0))),
@@ -106,7 +218,6 @@ class _StartScreenState extends State<StartScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }
