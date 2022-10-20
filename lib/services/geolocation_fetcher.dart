@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class GeolocationFetcher {
   static GeolocationFetcher get instance => _instance;
@@ -22,6 +23,16 @@ class GeolocationFetcher {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.medium);
+  }
+
+  Future<String?> getCountryByGeo(lat, long) async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
+    if (placemarks.isNotEmpty) {
+      Placemark first = placemarks[0];
+      return first.country;
+    }
+    return null;
   }
 }

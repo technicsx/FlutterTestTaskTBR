@@ -5,6 +5,7 @@ import 'package:test_task_tbr/views/widgets/country_tile.dart';
 import '../theme/constants.dart';
 
 class SheetView extends StatefulWidget {
+  static const headingText = "Country code";
   const SheetView({Key? key}) : super(key: key);
 
   @override
@@ -37,7 +38,7 @@ class _SheetViewState extends State<SheetView> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "Country code",
+                      SheetView.headingText,
                       style: TextStyle(
                           fontSize: headingsFontSize,
                           fontWeight: FontWeight.bold,
@@ -77,7 +78,7 @@ class _SheetViewState extends State<SheetView> {
                       child: Center(
                         child: TextField(
                           controller: textEditingController,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: accentFontColor,
                               fontWeight: FontWeight.w500),
                           onChanged: (val) => context

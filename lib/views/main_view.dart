@@ -8,7 +8,7 @@ import 'package:test_task_tbr/views/widgets/phone_number_field.dart';
 import '../theme/constants.dart';
 
 class MainView extends StatefulWidget {
-  final String screenHeading = "Get Started";
+  static const String screenHeading = "Get Started";
 
   const MainView({Key? key}) : super(key: key);
 
@@ -53,13 +53,13 @@ class _MainViewState extends State<MainView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Expanded(
+                          const Expanded(
                             flex: 1,
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 40.0),
+                              padding: EdgeInsets.only(top: 40.0),
                               child: Text(
-                                widget.screenHeading,
-                                style: const TextStyle(
+                                MainView.screenHeading,
+                                style: TextStyle(
                                     fontSize: headingsFontSize,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),

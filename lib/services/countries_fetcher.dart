@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:test_task_tbr/models/country.dart';
 
 class CountriesFetcher {
-  static final _allCountriesURL = "https://restcountries.com/v3.1/all";
+  static const _allCountriesURL = "https://restcountries.com/v3.1/all";
 
   static CountriesFetcher get instance => _instance;
   static final CountriesFetcher _instance = CountriesFetcher._();

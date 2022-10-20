@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_tbr/models/country.dart';
@@ -21,7 +20,7 @@ class CountryTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SizedBox(
-          height: 30,
+          height: 36,
           child: RichText(
             text: TextSpan(
               text: "${country.flag}   ",
