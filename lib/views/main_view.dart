@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
+import 'package:test_task_tbr/providers/selected_country.dart';
 import 'package:test_task_tbr/views/sheet_view.dart';
+import '../theme/constants.dart';
 
 class MainView extends StatefulWidget {
   final String screenHeading = "Get Started";
@@ -19,22 +20,24 @@ class _MainViewState extends State<MainView> {
     return CupertinoScaffold(
       body: Builder(
         builder: (context) => Scaffold(
-          backgroundColor: const Color(0xFF90ACFC),
+          backgroundColor: primaryColor,
           floatingActionButton: FloatingActionButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)),
-              backgroundColor: Colors.white,
-              child: const Icon(
-                Icons.arrow_forward,
-                size: 32,
-                color: Colors.black,
-              ),
-              onPressed: () => {}),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius)),
+            backgroundColor: Colors.white,
+            child: const Icon(
+              Icons.arrow_forward,
+              size: 32,
+              color: Colors.black,
+            ),
+            onPressed: () => {},
+          ),
           body: Container(
-            color: const Color(0xFF90ACFC),
+            color: primaryColor,
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: horizontalPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -46,7 +49,7 @@ class _MainViewState extends State<MainView> {
                         child: Text(
                           widget.screenHeading,
                           style: const TextStyle(
-                              fontSize: 38.0,
+                              fontSize: headingsFontSize,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -64,38 +67,45 @@ class _MainViewState extends State<MainView> {
                                     context: context,
                                     builder: (context) => const SheetView()),
                             child: Container(
-                              height: 50,
-                              child: Center(child: Text("+1")),
+                              height: inputsHeight,
                               decoration: BoxDecoration(
-                                color: Color(0xffb8ccfc),
-                                borderRadius: BorderRadius.circular(16.0),
+                                color: secondaryColor,
+                                borderRadius:
+                                    BorderRadius.circular(borderRadius),
+                              ),
+                              child: Center(
+                                child: Text(
+                                    "${context.read<SelectedCountry>().country?.flag} ${context.read<SelectedCountry>().country?.phoneCode}"),
                               ),
                             ),
                           )),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           Flexible(
-                              flex: 4,
-                              child: SizedBox(
-                                  height: 50,
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsets.only(left: 20),
-                                        filled: true,
-                                        fillColor: Color(0xffb8ccfc),
-                                        hintText: "Your phone number",
-                                        hintStyle: TextStyle(
-                                            color: Color(0xFF8693c7),
-                                            fontWeight: FontWeight.w500),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16.0),
-                                            borderSide: const BorderSide(
-                                                style: BorderStyle.none,
-                                                width: 0))),
-                                  ))),
+                            flex: 4,
+                            child: SizedBox(
+                              height: inputsHeight,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      left: horizontalPadding),
+                                  filled: true,
+                                  fillColor: secondaryColor,
+                                  hintText: "Your phone number",
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(borderRadius),
+                                    borderSide: const BorderSide(
+                                        style: BorderStyle.none, width: 0),
+                                  ),
+                                  hintStyle: const TextStyle(
+                                      color: Color(0xFF8693c7),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

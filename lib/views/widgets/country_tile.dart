@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_task_tbr/models/country.dart';
+import 'package:test_task_tbr/providers/selected_country.dart';
 
 class CountryTile extends StatelessWidget {
   final Country country;
@@ -10,22 +12,30 @@ class CountryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: RichText(
-                text: TextSpan(text: "${country.flag}   ", children: [
+      onTap: () {
+        context.read<SelectedCountry>().selectCountry(country);
+        Navigator.pop(context);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: RichText(
+          text: TextSpan(
+            text: "${country.flag}   ",
+            children: [
               TextSpan(
-                  text: "${country.phoneCode}  ",
-                  style: const TextStyle(color: Colors.purple, fontSize: 16)),
+                text: "${country.phoneCode}  ",
+                style: const TextStyle(color: Colors.purple, fontSize: 16),
+              ),
               TextSpan(
                   text: country.name,
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16)),
-            ])),
-          )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

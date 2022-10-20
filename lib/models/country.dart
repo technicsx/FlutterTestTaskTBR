@@ -12,5 +12,4 @@ class Country {
         phoneCode =
             "${receivedJson['idd']['root'] ?? ""}${receivedJson['idd']['suffixes'] != null ? receivedJson['idd']['suffixes'][0] : ""}",
         name = receivedJson['name']['common'];
-// phoneCode = "${jsonDecode(receivedJson['idd'])['root']}  ${jsonDecode(receivedJson['idd'])['suffixes'][0]}",
 }
