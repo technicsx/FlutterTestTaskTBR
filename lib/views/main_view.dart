@@ -34,7 +34,8 @@ class _MainViewState extends State<MainView> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(borderRadius)),
                   backgroundColor: isActivated ? Colors.white : secondaryColor,
-                  onPressed: isActivated ? () => {} : null,
+                  onPressed:
+                      isActivated ? () => print("---- Hooray!!! ----") : null,
                   child: Icon(
                     Icons.arrow_forward_rounded,
                     size: 32,

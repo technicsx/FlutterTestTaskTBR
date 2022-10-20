@@ -9,16 +9,23 @@ class SelectedCountry with ChangeNotifier {
   Country get country => _country;
 
   Future<void> selectCountryByGeo(List<Country> countries) async {
-    Position pos = await GeolocationFetcher.instance.fetchGeo();
-    final lat = pos.latitude;
-    final long = pos.longitude;
-    String? countryName = await GeolocationFetcher.instance.getCountryByGeo(lat, long);
-    if(countryName!=null){
-      final countriesByGeo = countries.where((country) => country.name.contains(countryName)).toList();
-      if(countriesByGeo.isNotEmpty) {
-        _country = countriesByGeo[0];
-        notifyListeners();
+    try {
+      Position pos = await GeolocationFetcher.instance.fetchGeo();
+      final lat = pos.latitude;
+      final long = pos.longitude;
+      String? countryName =
+          await GeolocationFetcher.instance.getCountryByGeo(lat, long);
+      if (countryName != null) {
+        final countriesByGeo = countries
+            .where((country) => country.name.contains(countryName))
+            .toList();
+        if (countriesByGeo.isNotEmpty) {
+          _country = countriesByGeo[0];
+          notifyListeners();
+        }
       }
+    } catch (err) {
+      print("Location Services Disabled or Location Permissions are denied!");
     }
   }
 
