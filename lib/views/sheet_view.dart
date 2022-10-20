@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_task_tbr/models/country.dart';
 import 'package:test_task_tbr/providers/all_countries_info.dart';
 import 'package:test_task_tbr/views/widgets/country_tile.dart';
 import '../theme/constants.dart';
@@ -14,8 +15,11 @@ class SheetView extends StatefulWidget {
 class _SheetViewState extends State<SheetView> {
   @override
   Widget build(BuildContext context) {
-    final allCountries = context.watch<AllCountriesInfo>().countries;
-    var currentCountries = allCountries;
+    final searchedCountries =
+        context.watch<AllCountriesInfo>().searchedCountries;
+    final currentCountries = searchedCountries.isEmpty
+        ? context.read<AllCountriesInfo>().countries
+        : searchedCountries;
     return Scaffold(
       backgroundColor: primaryColor,
       body: Padding(
@@ -64,18 +68,9 @@ class _SheetViewState extends State<SheetView> {
                     child: SizedBox(
                       height: inputsHeight,
                       child: TextField(
-                        onChanged: (val) {
-                          setState(() {
-                            if (val.isNotEmpty) {
-                              currentCountries = allCountries
-                                  .where(
-                                      (country) => country.name.contains(val))
-                                  .toList();
-                            } else {
-                              currentCountries = allCountries;
-                            }
-                          });
-                        },
+                        onChanged: (val) => context
+                            .read<AllCountriesInfo>()
+                            .searchCountries(val),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             prefixIcon: const Icon(
@@ -83,7 +78,7 @@ class _SheetViewState extends State<SheetView> {
                             ),
                             filled: true,
                             fillColor: secondaryColor,
-                            hintText: "country",
+                            hintText: "Search",
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(borderRadius),

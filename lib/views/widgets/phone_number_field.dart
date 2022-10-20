@@ -15,18 +15,20 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: inputsHeight,
-      child: TextField(
-        keyboardType: TextInputType.phone,
+      child: TextFormField(
+        keyboardType: TextInputType.number,
         inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(14),
+          FilteringTextInputFormatter.allow(RegExp("[0-9\\-\\(\\) ]")),
+          // LengthLimitingTextInputFormatter(14),
           PhoneNumberFormatter()
         ],
+        validator: (val)  {
+        },
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: horizontalPadding),
           filled: true,
           fillColor: secondaryColor,
-          hintText: "Your phone number",
+          hintText: "(123) 123-1234",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius),
             borderSide: const BorderSide(style: BorderStyle.none, width: 0),

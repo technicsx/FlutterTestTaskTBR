@@ -3,6 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_tbr/providers/selected_country.dart';
 import 'package:test_task_tbr/views/sheet_view.dart';
+import 'package:test_task_tbr/views/widgets/phone_number_field.dart';
 import '../theme/constants.dart';
 
 class MainView extends StatefulWidget {
@@ -17,6 +18,8 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
+    final selectedCountry =
+        context.watch<SelectedCountry>().country;
     return CupertinoScaffold(
       body: Builder(
         builder: (context) => Scaffold(
@@ -75,36 +78,16 @@ class _MainViewState extends State<MainView> {
                               ),
                               child: Center(
                                 child: Text(
-                                    "${context.read<SelectedCountry>().country?.flag} ${context.read<SelectedCountry>().country?.phoneCode}"),
+                                    "${selectedCountry.flag} ${selectedCountry.phoneCode}"),
                               ),
                             ),
                           )),
                           const SizedBox(
                             width: 8,
                           ),
-                          Flexible(
+                          const Flexible(
                             flex: 4,
-                            child: SizedBox(
-                              height: inputsHeight,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(
-                                      left: horizontalPadding),
-                                  filled: true,
-                                  fillColor: secondaryColor,
-                                  hintText: "Your phone number",
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(borderRadius),
-                                    borderSide: const BorderSide(
-                                        style: BorderStyle.none, width: 0),
-                                  ),
-                                  hintStyle: const TextStyle(
-                                      color: Color(0xFF8693c7),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
+                            child: PhoneNumberField(),
                           ),
                         ],
                       ),

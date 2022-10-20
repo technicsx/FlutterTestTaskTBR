@@ -1,28 +1,37 @@
 import 'package:flutter/services.dart';
 
 class PhoneNumberFormatter extends TextInputFormatter {
-  final hintExample = "(123) 1234-123";
+  final hintExample = "(123) 234-1234";
 
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.length > oldValue.text.length) {
-      if (newValue.text.length > hintExample.length) {
-        return oldValue;
+    if (newValue.text.isNotEmpty) {
+      if (newValue.text.length > oldValue.text.length) {
+        if (newValue.text.length > hintExample.length) {
+          return oldValue;
+        }
+        int lastIndex = newValue.text.length - 1;
+        String curSubStr = hintExample[lastIndex];
+        if (newValue.text.length < hintExample.length &&
+            (curSubStr == "(" || curSubStr == ")" || curSubStr == "-")) {
+          bool isClosing = curSubStr == ")";
+          return TextEditingValue(
+            text:
+                "${oldValue.text}${isClosing ? "$curSubStr " : curSubStr}${newValue.text[lastIndex]}",
+            selection: TextSelection.collapsed(
+                offset: newValue.selection.end + (isClosing ? 2 : 1)),
+          );
+        }
+        if (int.tryParse(curSubStr) == null &&
+                int.tryParse(newValue.text[lastIndex]) != null ||
+            int.tryParse(curSubStr) != null &&
+                int.tryParse(newValue.text[lastIndex]) == null) {
+          return oldValue;
+        }
       }
     }
-    final lastInput = newValue.text[newValue.text.length - 1];
-    if (RegExp(r'\d').hasMatch((lastInput))) {
-      return oldValue;
-    }
-    if (newValue.text.isNotEmpty &&
-        RegExp("-| |(|)").hasMatch(hintExample[newValue.text.length - 1])) {
-      return TextEditingValue(
-        text:
-            "${oldValue.text}${hintExample[newValue.text.length - 1]}${newValue.text[newValue.text.length - 1]}",
-        selection: TextSelection.collapsed(offset: newValue.selection.end),
-      );
-    }
+
     return newValue;
   }
 }

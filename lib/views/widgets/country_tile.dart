@@ -14,6 +14,7 @@ class CountryTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<SelectedCountry>().selectCountry(country);
+        print(country.name);
         Navigator.pop(context);
       },
       child: Padding(

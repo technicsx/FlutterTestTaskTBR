@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           return AnimatedSplashScreen.withScreenFunction(
             splash: 'images/splash.png',
             screenFunction: () async {
-              await allCountriesInfo.getAllCountries();
+              // await allCountriesInfo.getAllCountries();
               await selectedCountry.selectCountryByGeo();
               return const MainView();
             },
