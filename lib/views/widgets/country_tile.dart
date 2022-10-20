@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_tbr/models/country.dart';
 import 'package:test_task_tbr/providers/selected_country.dart';
+import 'package:test_task_tbr/theme/constants.dart';
 
 class CountryTile extends StatelessWidget {
   final Country country;
@@ -25,7 +26,7 @@ class CountryTile extends StatelessWidget {
             children: [
               TextSpan(
                 text: "${country.phoneCode}  ",
-                style: const TextStyle(color: Colors.purple, fontSize: 16),
+                style: const TextStyle(color: accentFontColor, fontSize: 16),
               ),
               TextSpan(
                   text: country.name,

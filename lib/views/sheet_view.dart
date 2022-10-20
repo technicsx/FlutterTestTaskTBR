@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_task_tbr/models/country.dart';
 import 'package:test_task_tbr/providers/all_countries_info.dart';
 import 'package:test_task_tbr/views/widgets/country_tile.dart';
 import '../theme/constants.dart';
@@ -68,6 +67,7 @@ class _SheetViewState extends State<SheetView> {
                     child: SizedBox(
                       height: inputsHeight,
                       child: TextField(
+
                         onChanged: (val) => context
                             .read<AllCountriesInfo>()
                             .searchCountries(val),
