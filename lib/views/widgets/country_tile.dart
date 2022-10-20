@@ -20,21 +20,24 @@ class CountryTile extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: RichText(
-          text: TextSpan(
-            text: "${country.flag}   ",
-            children: [
-              TextSpan(
-                text: "${country.phoneCode}  ",
-                style: const TextStyle(color: accentFontColor, fontSize: 16),
-              ),
-              TextSpan(
-                  text: country.name,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
-            ],
+        child: SizedBox(
+          height: 30,
+          child: RichText(
+            text: TextSpan(
+              text: "${country.flag}   ",
+              children: [
+                TextSpan(
+                  text: "${country.phoneCode}  ",
+                  style: const TextStyle(color: accentFontColor, fontSize: 16),
+                ),
+                TextSpan(
+                    text: country.name,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+              ],
+            ),
           ),
         ),
       ),

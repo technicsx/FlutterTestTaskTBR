@@ -24,6 +24,7 @@ class _MainViewState extends State<MainView> {
       create: (_) => ButtonActivation(),
       child: Consumer<ButtonActivation>(
         builder: (context, buttonActivation, _) {
+          final isActivated = buttonActivation.isActivated;
           return CupertinoScaffold(
             body: Builder(
               builder: (context) => Scaffold(
@@ -32,15 +33,15 @@ class _MainViewState extends State<MainView> {
                   disabledElevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(borderRadius)),
-                  backgroundColor: buttonActivation.isActivated
-                      ? Colors.white
-                      : secondaryColor,
-                  child: const Icon(
-                    Icons.arrow_forward,
+                  backgroundColor: isActivated ? Colors.white : secondaryColor,
+                  onPressed: isActivated ? () => {} : null,
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
                     size: 32,
-                    color: Colors.black,
+                    color: buttonActivation.isActivated
+                        ? accentFontColor
+                        : disabledAccentFontColor,
                   ),
-                  onPressed: buttonActivation.isActivated ? () => {} : null,
                 ),
                 body: Container(
                   color: primaryColor,
@@ -87,9 +88,10 @@ class _MainViewState extends State<MainView> {
                                     child: Center(
                                       child: Text(
                                         "${selectedCountry.flag} ${selectedCountry.phoneCode}",
+                                        textAlign: TextAlign.center,
                                         style: const TextStyle(
-                                          color: accentFontColor,
-                                        ),
+                                            color: accentFontColor,
+                                            fontWeight: FontWeight.w500),
                                       ),
                                     ),
                                   ),

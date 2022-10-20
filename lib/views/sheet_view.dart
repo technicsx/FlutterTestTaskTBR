@@ -12,13 +12,18 @@ class SheetView extends StatefulWidget {
 }
 
 class _SheetViewState extends State<SheetView> {
+  TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    textEditingController.text = context.read<AllCountriesInfo>().currentQuery;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final searchedCountries =
+    final currentCountries =
         context.watch<AllCountriesInfo>().searchedCountries;
-    final currentCountries = searchedCountries.isEmpty
-        ? context.read<AllCountriesInfo>().countries
-        : searchedCountries;
     return Scaffold(
       backgroundColor: primaryColor,
       body: Padding(
@@ -64,26 +69,35 @@ class _SheetViewState extends State<SheetView> {
               child: Row(
                 children: [
                   Expanded(
-                    child: SizedBox(
+                    child: Container(
                       height: inputsHeight,
-                      child: TextField(
-
-                        onChanged: (val) => context
-                            .read<AllCountriesInfo>()
-                            .searchCountries(val),
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            prefixIcon: const Icon(
-                              Icons.search_rounded,
-                            ),
-                            filled: true,
-                            fillColor: secondaryColor,
-                            hintText: "Search",
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(borderRadius),
-                                borderSide: const BorderSide(
-                                    style: BorderStyle.none, width: 0))),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(borderRadius),
+                          color: secondaryColor),
+                      child: Center(
+                        child: TextField(
+                          controller: textEditingController,
+                          style: TextStyle(
+                              color: accentFontColor,
+                              fontWeight: FontWeight.w500),
+                          onChanged: (val) => context
+                              .read<AllCountriesInfo>()
+                              .searchCountries(val),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              prefixIcon: const Icon(
+                                Icons.search_rounded,
+                                color: accentFontColor,
+                              ),
+                              filled: true,
+                              fillColor: secondaryColor,
+                              hintText: "Search",
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(borderRadius),
+                                  borderSide: const BorderSide(
+                                      style: BorderStyle.none, width: 0))),
+                        ),
                       ),
                     ),
                   ),

@@ -16,6 +16,9 @@ class PhoneNumberFormatter extends TextInputFormatter {
         if (newValue.text.length < hintExample.length &&
             (curSubStr == "(" || curSubStr == ")" || curSubStr == "-")) {
           bool isClosing = curSubStr == ")";
+          if (int.tryParse(newValue.text[lastIndex]) == null) {
+            return oldValue;
+          }
           return TextEditingValue(
             text:
                 "${oldValue.text}${isClosing ? "$curSubStr " : curSubStr}${newValue.text[lastIndex]}",
@@ -23,10 +26,10 @@ class PhoneNumberFormatter extends TextInputFormatter {
                 offset: newValue.selection.end + (isClosing ? 2 : 1)),
           );
         }
-        if (int.tryParse(curSubStr) == null &&
-                int.tryParse(newValue.text[lastIndex]) != null ||
-            int.tryParse(curSubStr) != null &&
-                int.tryParse(newValue.text[lastIndex]) == null) {
+        final inHinted = int.tryParse(curSubStr);
+        final inNew = int.tryParse(newValue.text[lastIndex]);
+        if (inHinted == null && inNew != null ||
+            inHinted != null && inNew == null) {
           return oldValue;
         }
       }
